@@ -15,7 +15,7 @@ And of course Plex Performance Monitor itself is open source on GitHub.
 
 ### Installation
 
-Dillinger requires [Node.js](https://nodejs.org/) v7+ to run.
+Plex Performance Monitor requires [Node.js](https://nodejs.org/) v7+ to run.
 
 Install the dependencies and devDependencies and start the server.
 
@@ -35,7 +35,7 @@ $ NODE_ENV=production node app
 ### Todos
 
  - Write tests
- - Add Night Mode
+ - Improve UI
 
 License
 ----
