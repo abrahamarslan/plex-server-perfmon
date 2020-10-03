@@ -29,6 +29,7 @@ socket.on('connect', () => {
     // Send the perf-data every second
     let perfData = setInterval(() => {
         perf().then((data) => {
+            data.macAddress = macAddress;
             socket.emit('perf', data);
         });
     }, 1000);
@@ -76,7 +77,8 @@ function perf() {
            cpuCores,
            cpuModel,
            cpuClockSpeed,
-           cpuLoad
+           cpuLoad,
+           osUptime
         });
     });
 }
