@@ -43,6 +43,8 @@ socket.on('connect', () => {
 function perf() {
     return new Promise(async (resolve, reject) => {
 
+        // Assume this client is active
+        const isActive = true;
         // Get OS type
         const osType = os.type();
         // Get the up-time
@@ -78,7 +80,8 @@ function perf() {
            cpuModel,
            cpuClockSpeed,
            cpuLoad,
-           osUptime
+           osUptime,
+           isActive
         });
     });
 }

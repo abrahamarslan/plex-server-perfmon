@@ -14,11 +14,30 @@ function socketMain(io, socket) {
             console.log('ui-client');
             // A react client is connected
             socket.join('ui');
+            // Send information on all connected clients to the front-end
+            Client.find({}, (err, docs) => {
+                docs.forEach((client) => {
+                    // On load, assume that machines are offline
+                    client.isActive = false;
+                    io.to('ui').emit('data', client);
+                })
+            })
         } else {
             // Not an authorized client, disconnect.
             socket.disconnect(true);
         }
     });
+
+    // If client disconnects, make isActive = false and emit it
+    socket.on('disconnect', () => {
+        // Find the client with this mac-address
+        Client.find({macAddress: macAddress}, (err, docs) => {
+            if(docs.length > 0) {
+                docs[0].isActive = false;
+                io.to('ui').emit('data', docs[0]);
+            }
+        })
+    })
 
     // A new machine has connected, check if the machine exists in the Mongo DB
     socket.on('init-perf', async (data) => {
